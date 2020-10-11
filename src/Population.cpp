@@ -11,8 +11,11 @@
 #include <Utils.h>
 #include <iostream>
 
+Options global_opts;
+
 Population::Population(Options opts) {
 	options = opts;
+	global_opts = opts;
 	avg = min = max = sumFitness = -1;
 	assert(options.popSize <= MAXPOP);
 	for (int i = 0; i < options.popSize; i++){
@@ -31,7 +34,7 @@ void Population::Init(){
 
 void Population::Evaluate(){
 	for (int i = 0; i < options.popSize; i++){
-		members[i]->fitness = Eval(members[i], options.cities);
+		members[i]->fitness = Eval(members[i], global_opts);
 	}
 }
 
