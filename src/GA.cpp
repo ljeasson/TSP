@@ -64,8 +64,10 @@ void GA::SetupOptions(int argc, char *argv[], int randomSeed){
 	options.popSize = atoi(argv[2]); //30;
 	options.maxgens = options.popSize * 1.5; //60;
 	
-	options.px = 0.00f; //0.95f; //0.7f;
+	options.px = 0.95f; //0.00f; //0.7f;
 	options.pm = 0.05f; //0.00f; //0.001f;
+	
+	options.optimum = atoi(argv[3]);
 	
 	options.infile = std::string ("infile");
 	options.outfile = std::string("outfile");

@@ -16,6 +16,7 @@ typedef struct {
 	std::string outfile;
 
 	int cities [100][3];
+	int optimum;
 
 	long int randomSeed;
 	int popSize;

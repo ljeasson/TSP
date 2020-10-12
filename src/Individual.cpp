@@ -40,7 +40,7 @@ void Individual::Init(){
 }
 
 
-// Source: Lecture 11 class slides
+// Source: CS 776 Lecture 11 class slides
 void Individual::SwapMutate(double pm){
 	
 	int randChromNum; int temp;

@@ -11,6 +11,7 @@
 #include <Utils.h>
 #include <iostream>
 
+using namespace std;
 Options global_opts;
 
 Population::Population(Options opts) {
@@ -94,22 +95,53 @@ int Population::ProportionalSelector(){
 	return i;
 }
 
-// TODO
 void Population::PMXAndSwapMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2){
 	
-	// Copy child to next parent
+	// Copy parents to children
 	for(int i = 0; i < options.chromLength; i++){ 
 		c1->chromosome[i] = p1->chromosome[i];
 		c2->chromosome[i] = p2->chromosome[i];
 	}
-	// If prob, then cross/exchange bits
+	// If prob of Xover, then cross/exchange bits
 	if(Flip(options.px)){ 
-		
+		//PMXOnePoint(p1, p2, c1, c2);
 	}
 	// Swap mutate each child
 	c1->SwapMutate(options.pm);
 	c2->SwapMutate(options.pm);	
 }
+
+// TODO
+void Population::PMXOnePoint(Individual *p1, Individual *p2, Individual *c1, Individual *c2){ //not debugged
+	int t1 = IntInRange(0, options.chromLength);
+	
+	cout << "IntInRange: " << t1 << endl;
+	cout << "p1: ";
+	for(int i = 0; i < options.chromLength; i++){
+		cout << p1->chromosome[i] << " ";
+	}
+	cout << endl << "p2: ";
+	for(int i = 0; i < options.chromLength; i++){
+		cout << p2->chromosome[i] << " ";
+	}
+	cout << endl << endl;
+	
+	for(int i = t1; i < options.chromLength; i++){
+		c1->chromosome[i] = p2->chromosome[i];
+		c2->chromosome[i] = p1->chromosome[i];
+	}
+	
+	cout << "c1: ";
+	for(int i = 0; i < options.chromLength; i++){
+		cout << c1->chromosome[i] << " ";
+	}
+	cout << endl << "c2: ";
+	for(int i = 0; i < options.chromLength; i++){
+		cout << c2->chromosome[i] << " ";
+	}
+	cout << endl << endl << endl;
+}
+
 
 
 

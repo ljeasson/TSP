@@ -17,7 +17,7 @@ using namespace std;
 
 double Eval(Individual *individual, Options opts){
 	int sum = 0;
-	double c_max = 200000; double fx = 0;
+	double c_max = opts.optimum; double fx = 0;
 	double xd = 0; double yd = 0; double dij = 0;	
 	
 	for(int i = 1; i <= individual->chromLength; i++){	

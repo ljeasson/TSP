@@ -37,6 +37,7 @@ public:
 
 	void TwoPoint(Individual *p1, Individual *p2, Individual *c1, Individual *c2);
 	void OnePoint(Individual *p1, Individual *p2, Individual *c1, Individual *c2);
+	void PMXOnePoint(Individual *p1, Individual *p2, Individual *c1, Individual *c2);
 
 };
 
