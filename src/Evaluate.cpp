@@ -16,16 +16,9 @@
 using namespace std;
 
 double Eval(Individual *individual, Options opts){
-	double sum = 0;
+	int sum = 0;
 	double c_max = 200000; double fx = 0;
 	double xd = 0; double yd = 0; double dij = 0;	
-	
-	/*
-	for(int i = 0; i < 10; i++){	
-		cout << individual->chromosome[i] << " ";
-	}
-	cout << endl;
-	*/
 	
 	for(int i = 1; i <= individual->chromLength; i++){	
 		// Find index of current city at chromosome[i] and chromosome[i-1]
@@ -58,6 +51,13 @@ double Eval(Individual *individual, Options opts){
 		//sum += (individual->chromosome[i] == 1 ? 1: 0);
 	}
 	
-	sum = c_max - fx;
+	// Calculate distance from final city to starting city
+	xd = opts.cities[individual->chromLength][1] - opts.cities[0][1];
+	yd = opts.cities[individual->chromLength][2] - opts.cities[0][2];
+	dij = round( sqrt( pow(xd,2) + pow(yd,2) ) );
+	fx += dij;
+	
+	//sum = c_max - fx;
+	sum = fx;
 	return sum;
 }
