@@ -17,11 +17,13 @@ int main(int argc, char *argv[]) {
 	int randomSeed = 1;
 	srand(time(NULL));
 	
-	randomSeed = rand() % ( high - low + 1 ) + low;	
-	GA ga = GA(argc, argv, randomSeed);
+	for (int i = 0; i < 30; i++) {
+		randomSeed = rand() % ( high - low + 1 ) + low;	
+		GA ga = GA(argc, argv, randomSeed);
 
-	ga.Init();
-	ga.Run();
+		ga.Init();
+		ga.Run();
+	}
 
 	return 0;
 }
