@@ -48,8 +48,8 @@ plt.plot(generations, maximum_fitness, "-r", label="Max Fitness")
 plt.legend(loc="upper left")
 
 plt.xticks(np.arange(0, 850, 50))
-plt.yticks(np.arange(0, 2, 0.25))
-#plt.yticks(np.arange(min(average_fitness), max(maximum_fitness), max(maximum_fitness)-max(average_fitness)))
+#plt.yticks(np.arange(0, 2, 0.25))
+plt.yticks(np.arange(min(average_fitness), max(maximum_fitness), max(maximum_fitness)-max(average_fitness)))
 
 plt.xlabel("Generation")
 plt.ylabel("Average Fitness")

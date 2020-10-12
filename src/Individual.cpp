@@ -9,6 +9,7 @@
 #include <Utils.h>
 #include <algorithm>
 #include <iostream>
+
 using namespace std;
 
 Individual::Individual(int len) {
@@ -34,11 +35,35 @@ void Individual::Init(){
 	
 	for(int i = 0; i < chromLength; i++){
 		chromosome[i] = shuffle_cities[i];
-		//cout << chromosome[i] << " ";
 		//chromosome[i] = Flip(0.5f);
 	}
-	//cout << endl << endl;
 }
+
+
+// TODO
+void Individual::SwapMutate(double pm){
+	
+	int randChromNum; int temp;
+	for (int i = 0; i < chromLength; i++){
+		if(Flip(pm)){
+		
+			// Change bit to random number in range 1 to chromLength
+			randChromNum = rand() % ( chromLength - 1 + 1 ) + 1;
+			temp = chromosome[i];
+			chromosome[i] = randChromNum;
+			
+			// Find previous index in chromosome and assign original value
+			for (int j = 0; j < chromLength; j++){
+				if (j != i && chromosome[j] == randChromNum){
+					chromosome[j] = temp;
+				}
+			}
+			
+			
+		}
+	}	
+}
+
 
 void Individual::Mutate(double pm){
 	for(int i = 0; i < chromLength; i++){
@@ -46,11 +71,4 @@ void Individual::Mutate(double pm){
 			chromosome[i] = 1 - chromosome[i];
 	}
 
-}
-
-// TODO
-void Individual::SwapMutate(double pm){
-	for(int i = 0; i < chromLength; i++){
-		
-	}
 }

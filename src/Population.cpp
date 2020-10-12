@@ -72,11 +72,15 @@ void Population::Generation(Population *child){
 		p1 = members[pi1]; p2 = members[pi2];
 		c1 = child->members[ci1]; c2 = child->members[ci2];
 
-		XoverAndMutate(p1, p2, c1, c2);
+		PMXAndSwapMutate(p1, p2, c1, c2);
 	}
 }
 
-
+// TODO
+int Population::CHCSelector(){
+	int i = -1;
+	return i;
+}
 
 int Population::ProportionalSelector(){
 	int i = -1;
@@ -93,18 +97,21 @@ int Population::ProportionalSelector(){
 // TODO
 void Population::PMXAndSwapMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2){
 	
-	for(int i = 0; i < options.chromLength; i++){ //First copy
+	// Copy child to next parent
+	for(int i = 0; i < options.chromLength; i++){ 
 		c1->chromosome[i] = p1->chromosome[i];
 		c2->chromosome[i] = p2->chromosome[i];
 	}
-	if(Flip(options.px)){ // if prob, then cross/exchange bits
+	// If prob, then cross/exchange bits
+	if(Flip(options.px)){ 
 		
 	}
-
+	// Swap mutate each child
 	c1->SwapMutate(options.pm);
 	c2->SwapMutate(options.pm);	
-	
 }
+
+
 
 void Population::XoverAndMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2){
 

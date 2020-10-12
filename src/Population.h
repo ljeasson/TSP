@@ -30,6 +30,7 @@ public:
 	void Statistics();
 
 	int ProportionalSelector();
+	int CHCSelector();
 	
 	void PMXAndSwapMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2);
 	void XoverAndMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2);

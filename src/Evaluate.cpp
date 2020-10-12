@@ -20,6 +20,13 @@ double Eval(Individual *individual, Options opts){
 	double c_max = 200000; double fx = 0;
 	double xd = 0; double yd = 0; double dij = 0;	
 	
+	/*
+	for(int i = 0; i < 10; i++){	
+		cout << individual->chromosome[i] << " ";
+	}
+	cout << endl;
+	*/
+	
 	for(int i = 1; i <= individual->chromLength; i++){	
 		// Find index of current city at chromosome[i] and chromosome[i-1]
 		int index1; int index2;
@@ -37,6 +44,7 @@ double Eval(Individual *individual, Options opts){
 		//cout << opts.cities[index2][0] << " " << opts.cities[index2][1] << " " << opts.cities[index2][2] << endl;
 		
 		// Calculate Euclidean distance between cities
+		// Source: TSPLIB 95 Documentation
 		xd = opts.cities[index1][1] - opts.cities[index2][1];
 		yd = opts.cities[index1][2] - opts.cities[index2][2];
 		dij = round( sqrt( pow(xd,2) + pow(yd,2) ) );
