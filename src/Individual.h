@@ -15,6 +15,8 @@ public:
 	Individual(int chromLen);
 	virtual ~Individual();
 
+	int tourLength;
+
 	int chromLength;
 	int chromosome[MAX_CHROMLENGTH];
 	double fitness;

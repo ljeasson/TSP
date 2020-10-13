@@ -1,0 +1,14 @@
+/*
+//int pi1, pi2, ci1, ci2;
+
+pi1 = ProportionalSelector();
+pi2 = ProportionalSelector();
+
+ci1 = i;
+ci2 = i + 1;
+
+p1 = members[pi1]; p2 = members[pi2];
+c1 = child->members[ci1]; c2 = child->members[ci2];
+
+PMXAndSwapMutate(p1, p2, c1, c2);
+*/

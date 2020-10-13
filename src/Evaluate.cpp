@@ -17,7 +17,8 @@ using namespace std;
 
 double Eval(Individual *individual, Options opts){
 	int sum = 0;
-	double c_max = opts.optimum; double fx = 0;
+	double c_max = opts.optimum; 
+	double fx = 0;
 	double xd = 0; double yd = 0; double dij = 0;	
 	
 	for(int i = 1; i <= individual->chromLength; i++){	
@@ -57,7 +58,13 @@ double Eval(Individual *individual, Options opts){
 	dij = round( sqrt( pow(xd,2) + pow(yd,2) ) );
 	fx += dij;
 	
-	//sum = c_max - fx;
+	// Set tour length to objective function
+	// Minimize tour length
+	//individual->tourLength = fx - c_max;
+	//sum = fx - c_max;
+	
+	// Maximize fitness
 	sum = fx;
+	
 	return sum;
 }

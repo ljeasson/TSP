@@ -14,6 +14,7 @@ using namespace std;
 
 Individual::Individual(int len) {
 	// TODO Auto-generated constructor stub
+	tourLength = 0;
 	chromLength = len;
 	fitness = -1;
 }

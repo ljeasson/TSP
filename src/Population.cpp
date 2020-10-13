@@ -51,6 +51,7 @@ void Population::Statistics(){
 			max = members[i]->fitness;
 	}
 	avg = sumFitness/options.popSize;
+	//tourLength = members[0]->tourLength;
 }
 
 void Population::Report(unsigned long int gen){
@@ -61,38 +62,25 @@ void Population::Report(unsigned long int gen){
 }
 
 void Population::Generation(Population *child){
-	int pi1, pi2, ci1, ci2;
+	
+	// For all members in parent population
+	// Get 2 parents and produce 2 children using crossover and mutation
 	Individual *p1, *p2, *c1, *c2;
 	for(int i = 0; i < options.popSize; i += 2){
-		pi1 = ProportionalSelector();
-		pi2 = ProportionalSelector();
-
-		ci1 = i;
-		ci2 = i + 1;
-
-		p1 = members[pi1]; p2 = members[pi2];
-		c1 = child->members[ci1]; c2 = child->members[ci2];
-
+		p1 = members[i]; p2 = members[i+1];
+		c1 = child->members[i]; c2 = child->members[i+1];
 		PMXAndSwapMutate(p1, p2, c1, c2);
 	}
-}
-
-// TODO
-int Population::CHCSelector(){
-	int i = -1;
-	return i;
-}
-
-int Population::ProportionalSelector(){
-	int i = -1;
-	float sum = 0;
-	float limit = RandomFraction() * sumFitness;
-	do {
-		i = i + 1;
-		sum += members[i]->fitness;
-	} while (sum < limit && i < options.popSize-1 );
-
-	return i;
+	
+	// Competition between parent and child population
+	for (int i = 0; i < options.popSize; i++){
+	
+		// If parent fitness at index is greater, assign to child fitness at index
+		// otherwise, leave as is
+		if (members[i]->fitness > child->members[i]->fitness){
+			child->members[i]->fitness = members[i]->fitness;			
+		}
+	}
 }
 
 void Population::PMXAndSwapMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2){
@@ -144,6 +132,19 @@ void Population::PMXOnePoint(Individual *p1, Individual *p2, Individual *c1, Ind
 
 
 
+
+
+int Population::ProportionalSelector(){
+	int i = -1;
+	float sum = 0;
+	float limit = RandomFraction() * sumFitness;
+	do {
+		i = i + 1;
+		sum += members[i]->fitness;
+	} while (sum < limit && i < options.popSize-1 );
+
+	return i;
+}
 
 void Population::XoverAndMutate(Individual *p1, Individual *p2, Individual *c1, Individual *c2){
 
