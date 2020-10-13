@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <Utils.h>
 #include <GA.h>
 
 int main(int argc, char *argv[]) {
@@ -18,7 +19,7 @@ int main(int argc, char *argv[]) {
 	srand(time(NULL));
 	
 	//for (int i = 0; i < 30; i++) {
-	randomSeed = rand() % ( high - low + 1 ) + low;	
+	randomSeed = IntInRange(low, high); //rand() % ( high - low + 1 ) + low;	
 	GA ga = GA(argc, argv, randomSeed);
 
 	ga.Init();

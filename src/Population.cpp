@@ -65,9 +65,13 @@ void Population::Generation(Population *child){
 	
 	// For all members in parent population
 	// Get 2 parents and produce 2 children using crossover and mutation
+	int pi1, pi2, range1, range2;
 	Individual *p1, *p2, *c1, *c2;
 	for(int i = 0; i < options.popSize; i += 2){
-		p1 = members[i]; p2 = members[i+1];
+		pi1 = IntInRange(0,options.popSize-1); 
+		pi2 = IntInRange(0,options.popSize-1);
+		
+		p1 = members[pi1]; p2 = members[pi2];
 		c1 = child->members[i]; c2 = child->members[i+1];
 		PMXAndSwapMutate(p1, p2, c1, c2);
 	}
