@@ -1,19 +1,23 @@
 #!/bin/bash
-rm outfile
 g++ -o ga *.cpp -I. -lm
 
-./ga berlin52.tsp 500 24000
-python3 gagraph.py
+rm outfile
+./ga berlin52.tsp 500 40000
+python3 gagraph.py berlin52 500
 
-./ga burma14.tsp 500 24000
-python3 gagraph.py
+#rm outfile
+#./ga burma14.tsp 500 24000
+#python3 gagraph.py
 
-./ga eil51.tsp 500 24000
-python3 gagraph.py
+#rm outfile
+#./ga eil51.tsp 500 24000
+#python3 gagraph.py
 
-./ga eil76.tsp 500 24000
-python3 gagraph.py
+#rm outfile
+#./ga eil76.tsp 500 24000
+#python3 gagraph.py
 
+#rm outfile
 #./ga lin105.tsp 500 24000
 #python3 gagraph.py
 

@@ -1,0 +1,7 @@
+QUATLITY:
+Optimum (Avg of Best): 37894.76444444446
+Average (Avg of Average): 29171.508223466626
+Percent Difference from Optimum: 26.013839368030407 = 26%
+
+RELIABILITY:
+Percentage of runs within quality: 3.3333333333333335 = 3%
