@@ -81,6 +81,7 @@ def main(argv):
     print()
     
 
+
     ''' RELIABILITY = Percentage of runs you get within Quality -- out of total number of runs '''
     fw.write("\nRELIABILITY:\n")
     print("RELIABILITY:")
@@ -90,6 +91,7 @@ def main(argv):
     avg_fits = []
     best_fits = []
     optimum_achieved = False
+    
     for line in lines:
         line = line.replace(" ", "")
         data = line.split("\t")
@@ -99,9 +101,8 @@ def main(argv):
             avg_fits.append(float(data[2]))
             best_fits.append(float(data[3]))
         
-        # If at end of run, calculate percent difference
-        if len(data) >= 4:
-            if int(data[0]) == max_gens-1:
+            # If at end of run, calculate percent differences
+            if int(data[0]) == max_gens-1:        
                 
                 # Check if optimum percent diff was achieved during run
                 for i in range(len(best_fits)):
@@ -117,30 +118,54 @@ def main(argv):
                 best_fits = []
     
     quality_run_percentage = (num_quality_runs / 30.0) * 100.0
-    print("Percentage of runs within quality: ", quality_run_percentage, "= "+str(round(quality_run_percentage))+"%")
-    fw.write("Percentage of runs within quality: " + str(quality_run_percentage) + " = " + str(round(quality_run_percentage)) + "%\n")
+    print("Percentage of runs within QUATLITY: ", quality_run_percentage, "= "+str(round(quality_run_percentage))+"%")
+    fw.write("Percentage of runs within QUATLITY: " + str(quality_run_percentage) + " = " + str(round(quality_run_percentage)) + "%\n")
     
 
-    '''	
-    #SPEED
-    found_generation = 0
-    found_num = 0
+
+    ''' SPEED = Average number of evaluations needed to get within Quality '''
+    fw.write("\nSPEED:\n")
+    print("SPEED:")
+    eval_nums = []
+    
+    gens = []
+    avg_fits = []
+    best_fits = []
+    
     for line in lines:
         line = line.replace(" ", "")
-        data = line.split("\t")  
-        if '' not in data:  
-            if float(data[2]) == best_avg_fitness:
-                found_generation += int(data[0])
-                found_num += 1
-	      
-    if found_num > 0:
-        speed = found_generation/found_num
-    else:
-        speed = 0
-    print("Speed:",speed)
-    fw.write("Speed: " + str(speed) + "\n")
-    '''
+        data = line.split("\t")
+        
+        # Append current gen, avg fitness, and best fitness
+        if len(data) >= 4:
+            gens.append(float(data[0]))
+            avg_fits.append(float(data[2]))
+            best_fits.append(float(data[3]))
+            
+            # If at end of run, calculate percent difference at each gen
+            if int(data[0]) == max_gens-1:
+                
+                # Check if optimum percent diff was achieved during run
+                for i in range(len(gens)):
+                
+                    percent_diff = abs(best_fits[i] - avg_fits[i]) / ((best_fits[i] + avg_fits[i]) / 2) * 100
+                    #print(int(data[0]), (max_gens-1), int(data[0]) == (max_gens-1), (percent_diff < percent_diff_optimum))
+                
+                    if (percent_diff > percent_diff_optimum):
+                        eval_nums.append(gens[i])
+                        break
+                
+                gens = []
+                avg_fits = []
+                best_fits = []
+        
+    #print(eval_nums)
+    
+    average_eval_nums = sum(eval_nums) / 30
+    print("Average number of evaluations to achieve QUALITY:",round(average_eval_nums),"generations")
+    fw.write("Average number of evaluations to achieve QUALITY: " + str(round(average_eval_nums)) + " generations\n")
     fw.close()
+    
 
 if __name__ == "__main__":
    main(sys.argv[1:])

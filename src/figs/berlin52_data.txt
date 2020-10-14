@@ -4,4 +4,7 @@ Average (Avg of Average): 29171.508223466626
 Percent Difference from Optimum: 26.013839368030407 = 26%
 
 RELIABILITY:
-Percentage of runs within quality: 3.3333333333333335 = 3%
+Percentage of runs within QUATLITY: 3.3333333333333335 = 3%
+
+SPEED:
+Average number of evaluations to achieve QUALITY: 11 generations
