@@ -11,6 +11,8 @@
 #include <Utils.h>
 #include <iostream>
 
+#include <unistd.h>
+
 using namespace std;
 Options global_opts;
 
@@ -56,7 +58,7 @@ void Population::Statistics(){
 
 void Population::Report(unsigned long int gen){
 	char printbuf[1024];
-	sprintf(printbuf, "%4i \t %f \t %f \t %f\n ", (int)gen, min, avg, max);
+	sprintf(printbuf, "%4i \t %f \t %f \t %f \t \n ", (int)gen, min, avg, max);
 	WriteBufToFile(std::string(printbuf), options.outfile);
 	std::cout << printbuf;
 }
@@ -96,42 +98,38 @@ void Population::PMXAndSwapMutate(Individual *p1, Individual *p2, Individual *c1
 	}
 	// If prob of Xover, then cross/exchange bits
 	if(Flip(options.px)){ 
-		//PMXOnePoint(p1, p2, c1, c2);
+		PMXOnePoint(p1, p2, c1, c2);
 	}
 	// Swap mutate each child
 	c1->SwapMutate(options.pm);
 	c2->SwapMutate(options.pm);	
 }
 
-// TODO
 void Population::PMXOnePoint(Individual *p1, Individual *p2, Individual *c1, Individual *c2){ //not debugged
 	int t1 = IntInRange(0, options.chromLength);
-	
-	cout << "IntInRange: " << t1 << endl;
-	cout << "p1: ";
-	for(int i = 0; i < options.chromLength; i++){
-		cout << p1->chromosome[i] << " ";
-	}
-	cout << endl << "p2: ";
-	for(int i = 0; i < options.chromLength; i++){
-		cout << p2->chromosome[i] << " ";
-	}
-	cout << endl << endl;
-	
+		
+	// Perform Crossover
 	for(int i = t1; i < options.chromLength; i++){
 		c1->chromosome[i] = p2->chromosome[i];
 		c2->chromosome[i] = p1->chromosome[i];
 	}
 	
-	cout << "c1: ";
-	for(int i = 0; i < options.chromLength; i++){
-		cout << c1->chromosome[i] << " ";
+	// Loop through part of chromosome that did not participate in crossover
+	for (int i = 0; i < t1; i++){
+		// Loop through part of chromosome that DID participate in crossover
+		for(int j = t1; j < options.chromLength; j++){
+			// If an element in non-crossover is found in crossover
+			// i.e a duplicate, replace it with corresponding element 
+			// from other chromosome
+			
+			// Check child1 for duplicates and replace
+			if (c1->chromosome[i] == c1->chromosome[j])
+				c1->chromosome[i] = c2->chromosome[j];
+			// Check child2 for duplicates replace
+			if (c2->chromosome[i] == c2->chromosome[j])
+				c2->chromosome[i] = c1->chromosome[j];
+		}
 	}
-	cout << endl << "c2: ";
-	for(int i = 0; i < options.chromLength; i++){
-		cout << c2->chromosome[i] << " ";
-	}
-	cout << endl << endl << endl;
 }
 
 
