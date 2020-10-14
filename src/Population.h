@@ -20,7 +20,7 @@ public:
 
 	Options options;
 	Individual *members[MAXPOP];
-	double avg, min, max, sumFitness;
+	double avg, min, max, sumFitness, sumTourLength, avgTourLength, maxTourLength;
 
 
 	void Init();

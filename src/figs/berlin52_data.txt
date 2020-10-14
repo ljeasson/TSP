@@ -1,10 +1,26 @@
+AVG-AVG FITNESS and MAX-AVG FITNESS:
+
 QUATLITY:
-Optimum (Avg of Best): 37894.76444444446
-Average (Avg of Average): 29171.508223466626
-Percent Difference from Optimum: 26.013839368030407 = 26%
+Optimum (Avg of Best): 38069.69568888888
+Average (Avg of Average): 29314.698501066654
+Percent Difference from Optimum: 25.98523676904189 = 26%
 
 RELIABILITY:
 Percentage of runs within QUATLITY: 3.3333333333333335 = 3%
 
 SPEED:
-Average number of evaluations to achieve QUALITY: 11 generations
+Average number of evaluations to achieve QUALITY: 14 generations
+
+
+AVG-AVG OBJECTIVE FUNCTION and MAX-AVG OBJECTIVE FUNCTION:
+
+QUATLITY:
+Optimum (Avg of Best): 18599.28964444446
+Average (Avg of Average): 10882.634832266676
+Percent Difference from Optimum: 52.34837921298832 = 52%
+
+RELIABILITY:
+Percentage of runs within QUATLITY: 3.3333333333333335 = 3%
+
+SPEED:
+Average number of evaluations to achieve QUALITY: 9 generations

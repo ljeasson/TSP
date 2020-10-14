@@ -60,7 +60,7 @@ double Eval(Individual *individual, Options opts){
 	
 	// Set tour length to objective function
 	// Minimize tour length
-	//individual->tourLength = fx - c_max;
+	individual->tourLength = c_max - fx;
 	//sum = fx - c_max;
 	
 	// Maximize fitness

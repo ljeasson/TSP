@@ -19,7 +19,7 @@ Options global_opts;
 Population::Population(Options opts) {
 	options = opts;
 	global_opts = opts;
-	avg = min = max = sumFitness = -1;
+	avg = min = max = sumFitness = sumTourLength = avgTourLength = maxTourLength = -1;
 	assert(options.popSize <= MAXPOP);
 	for (int i = 0; i < options.popSize; i++){
 		members[i] = new Individual(options.chromLength);
@@ -43,22 +43,30 @@ void Population::Evaluate(){
 
 void Population::Statistics(){
 	sumFitness = 0;
+	sumTourLength = 0;
 	min = members[0]->fitness;
 	max = members[0]->fitness;
+	maxTourLength = members[0]->tourLength;
+	
 	for(int i = 0; i < options.popSize; i++){
 		sumFitness += members[i]->fitness;
+		sumTourLength += members[i]->tourLength;
+		
 		if(min > members[i]->fitness)
 			min = members[i]->fitness;
 		if(max < members[i]->fitness)
 			max = members[i]->fitness;
+			
+		if(maxTourLength < members[i]->tourLength)
+			maxTourLength = members[i]->tourLength;
 	}
 	avg = sumFitness/options.popSize;
-	//tourLength = members[0]->tourLength;
+	avgTourLength = sumTourLength/options.popSize;
 }
 
 void Population::Report(unsigned long int gen){
 	char printbuf[1024];
-	sprintf(printbuf, "%4i \t %f \t %f \t %f \t \n ", (int)gen, min, avg, max);
+	sprintf(printbuf, "%4i \t %f \t %f \t %f \t %f \t %f\n ", (int)gen, min, avg, max, avgTourLength, maxTourLength);
 	WriteBufToFile(std::string(printbuf), options.outfile);
 	std::cout << printbuf;
 }
